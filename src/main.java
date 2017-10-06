@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Gellert-Eva
+ * @author Gellert Zelenak
  */
 public class main {
 
