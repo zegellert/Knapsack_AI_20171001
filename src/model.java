@@ -44,7 +44,7 @@ public class model {
     }
     
     ///X AND Y BEGINS AT 0
-    public void insert(int X,int Y,int item) throws Exception{
+    public void insert(int X,int Y,item item) throws Exception{
         
         for(int i=X;i<X+item.height;i++){
             for(int j=Y;j<Y+item.width;j++){
