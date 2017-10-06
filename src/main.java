@@ -33,11 +33,7 @@ public class main {
     
     public static void item_to_sack(item item,model sack,int X,int Y){
         try{
-        for(int i=X;i<X+item.height;i++){
-            for(int j=Y;j<Y+item.width;j++){
-                if(sack.getValue(i,j)!=0){throw new Exception("Items overlapping.");}
-            }
-        }
+        
         for(int i=X;i<X+item.height;i++){
             for(int j=Y;j<Y+item.width;j++){
                 

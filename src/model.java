@@ -44,8 +44,25 @@ public class model {
     }
     
     ///X AND Y BEGINS AT 0
-    public void insert(int X,int Y,int data){
-        array[X][Y]=data;
+    public void insert(int X,int Y,int item) throws Exception{
+        
+        for(int i=X;i<X+item.height;i++){
+            for(int j=Y;j<Y+item.width;j++){
+                if(this.getValue(i,j)!=0){throw new Exception("Items overlapping.");}
+            }
+        }
+        
+        for(int i=X;i<X+item.height;i++){
+            for(int j=Y;j<Y+item.width;j++){
+                
+               array[X][Y]=item.value;
+            }
+        }
+        
+        Point p=new Point(X,Y);
+        items.put(p,item);
+        
+        
     }
     
     public class Point{
