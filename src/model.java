@@ -1,3 +1,6 @@
+
+import java.util.HashMap;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +12,9 @@
  * @author Gellert-Eva
  */
 public class model {
+    
+    HashMap<Point,item> items=new HashMap<Point, item>();
+    
     int[][] array;
     int width;
     int height;
@@ -40,5 +46,11 @@ public class model {
     ///X AND Y BEGINS AT 0
     public void insert(int X,int Y,int data){
         array[X][Y]=data;
+    }
+    
+    public class Point{
+        public int X;
+        public int Y;
+        public Point(int x,int y){X=x;Y=y;}
     }
 }
