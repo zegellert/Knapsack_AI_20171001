@@ -33,13 +33,8 @@ public class main {
     
     public static void item_to_sack(item item,model sack,int X,int Y){
         try{
+            sack.insert(X, Y, item);
         
-        for(int i=X;i<X+item.height;i++){
-            for(int j=Y;j<Y+item.width;j++){
-                
-               sack.insert(i, j, item.value);
-            }
-        }
         }
         catch(Exception e){System.out.println("That item couldn't be inserted there. Error: "+e.getMessage());}
     }
