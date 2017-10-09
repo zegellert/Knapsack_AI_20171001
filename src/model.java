@@ -55,13 +55,12 @@ public class model {
         for(int i=X;i<X+item.height;i++){
             for(int j=Y;j<Y+item.width;j++){
                 
-               array[X][Y]=item.value;
+               array[i][j]=item.value;
             }
         }
         
         Point p=new Point(X,Y);
         items.put(p,item);
-        
         
     }
     

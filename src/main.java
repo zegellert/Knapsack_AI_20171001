@@ -10,9 +10,7 @@
  */
 public class main {
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
        System.out.println("JUPITER");
        model m=new model(5,7);
