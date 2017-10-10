@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Gellert-Eva
+ * @author Gellert Zelenak
  */
 public class model {
     
