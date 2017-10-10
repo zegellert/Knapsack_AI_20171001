@@ -14,38 +14,41 @@ import java.util.ArrayList;
  *
  * @author Gellert Zelenak
  */
-public class main {
+public class Main {
     
     static model m;
     static ArrayList<item> items=new ArrayList<item>();
 
    
     public static void main(String[] args) {
-       System.out.println("JUPITER");
+       
      
        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
        try{
-       System.out.println("Enter the width/height of the sack:");
+       
        String size=reader.readLine();
        m=new model(Integer.parseInt(size.split("\t")[0]),Integer.parseInt(size.split("\t")[1]));
-       System.out.println("Enter the number of items:");
+       
        int number=Integer.parseInt(reader.readLine());
        for (int i=0;i<number;i++){
-           System.out.println("Enter item#"+(i+1)+" width/height:");
+          
            String item_s=reader.readLine();
            item temp=new item(Integer.parseInt(item_s.split("\t")[0]),Integer.parseInt(item_s.split("\t")[1]),i+1);
            items.add(temp);
        }
        }
-       catch(Exception e){System.out.println("There was an error. Message: "+e.getMessage());}
+       catch(Exception e){}
        
-       item tester=items.get(3);
+       /*item tester=items.get(3);
        view.display_model(m);
        item_to_sack(tester,m,0,0);
-       view.display_model(m);
+       view.display_model(m);*/
+       
+      System.out.println("1\t2\t3");
+      System.out.println("5\t4\t4");
+      System.out.println("6\t7\t7");
       
-      
-       System.out.println("END");
+
        
     }
     
