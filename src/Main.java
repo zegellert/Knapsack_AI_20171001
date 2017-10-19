@@ -46,7 +46,10 @@ public class Main {
        }
        catch(Exception e){}
        
-       item_to_sack(items.get(0),m,0,0);
+       for(int i=0;i<items.size();i++){
+           try_to_fit(items.get(i),m,0,0);
+       }
+       
        view.display_model(m);
        display_cumulatives(cumulatives);
        
@@ -58,10 +61,13 @@ public class Main {
     }
     
     public static void try_to_fit(item item,model sack,int X,int Y){
-        if(X>sack.width){strays.add(item);}
+        if(X>sack.width){
+            System.out.println("Item went to strays.");
+            strays.add(item);
+        }
         else{
             
-        int column=0;
+        int column=X;
         int row=0;
         
         Boolean problem=false;
@@ -73,13 +79,18 @@ public class Main {
             if(item.height<c.space){
                 column=i;
                 row=c.next;
+                System.out.println("Chosen column: "+column+","+row);
                 break;
             }
+            
         }
         
         ///ROW SPACE CHECKING LOOP:
         for(int j=row;j<row+item.width;j++){
-            if(m.getValue(column, j)!=0){problem=true;};
+            if(m.getValue(column, j)!=0){
+                System.out.println("An item is in the way already.");
+                problem=true;
+            };
         }
         
         if(!problem){item_to_sack(item,m,column,row);}
@@ -119,6 +130,8 @@ public class Main {
         }
         System.out.print("\n");
     }
+    
+    
     
     
     public static class cumulative{
