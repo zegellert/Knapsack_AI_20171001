@@ -60,9 +60,13 @@ public class Main {
     public static void try_to_fit(item item,model sack,int X,int Y){
         if(X>sack.width){strays.add(item);}
         else{
+            
         int column=0;
         int row=0;
         
+        Boolean problem=false;
+        
+        ///COLUMN CHOOSING LOOP:
         ///THIS OUGHT TO BE DONE IN A WHILE LOOP:
         for(int i=0;i<cumulatives.size();i++){
             cumulative c=cumulatives.get(i);
@@ -72,7 +76,16 @@ public class Main {
                 break;
             }
         }
+        
+        ///ROW SPACE CHECKING LOOP:
+        for(int j=row;j<row+item.width;j++){
+            if(m.getValue(column, j)!=0){problem=true;};
         }
+        
+        if(!problem){item_to_sack(item,m,column,row);}
+        
+        
+        }//END OF ELSE
         
         
         
