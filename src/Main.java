@@ -59,7 +59,7 @@ public class Main {
            try_to_fit(items.get(i),m,0,0);
        }
        
-       if(strays.size()>0){
+      /*if(strays.size()>0){
            cumulatives.clear();
            m=new model(height,width);
             for(int i=0;i<m.height;i++){
@@ -68,18 +68,41 @@ public class Main {
             }
            Collections.sort(strays,Collections.reverseOrder(ac));
            for(int i=0;i<strays.size();i++){
-           try_to_fit(strays.get(i),m,0,0);
+               item stray=strays.get(i);
+               stray.rotate();
+              strays.remove(stray);
+            try_to_fit(stray,m,0,0);
        }
            for(int i=0;i<items.size();i++){
            try_to_fit(items.get(i),m,0,0);
        }
-       }
+       }*/
+      
+      for(int i=0;i<strays.size();i++){
+               item stray=strays.get(i);
+               strays.remove(stray);
+               stray.modified=0;
+               try_to_fit(stray,m,0,0);
+      }
+      
+      while(strays.size()>0){
+        
+      for(int c=0;c<3;c++){
+          for(int i=0;i<strays.size();i++){
+               item stray=strays.get(i);
+               stray.modified=0;
+               items.remove(stray);
+          }
+          Collections.sort(strays,Collections.reverseOrder(ac));
+          redo();
+      }}
+     
        
        view.display_model(m);
        
        //display_cumulatives(cumulatives);
        
-       
+       //System.out.println("Strays: "+strays.size());
        
       
 
@@ -87,11 +110,8 @@ public class Main {
     }
     
     public static void try_to_fit(item item,model sack,int X,int Y){
-        if(X>sack.width){
-            items.remove(item);
-            strays.add(item);
-        }
-        else{
+        
+
             
             
         int column=X;
@@ -104,22 +124,27 @@ public class Main {
             
             if(item.height<=c.space){
                 column=i;
-                row=c.next;
+
+                for(int j=0;j<m.height;j++){
+                    int check=m.getValue(j, column);
+                    if(check==0){
+                        row=j;
+                        break;
+                    }
+                }
+  
                 break;
             }
             
         }
        
         
-        try{
-        item_to_sack(item,m,column,row);}
-        catch(Exception e){
-            items.remove(item);
-            strays.add(item);
-        }
+        
+        item_to_sack(item,m,column,row);
         
         
-        }//END OF ELSE
+        
+   
         
         
         
@@ -143,8 +168,33 @@ public class Main {
         }
         catch(Exception e){
             
-            //System.out.println("Item "+item.value+" couldn't be inserted to: "+X+","+Y+". Error: "+e.getMessage());
+           //System.out.println("Item "+item.value+" ("+item.width+","+item.height+") couldn't be inserted to: "+X+","+Y+". Error: "+e.getMessage());
+            if(item.modified<4){
+                item.modified++;
+                item.rotate();
+                try_to_fit(item,sack,0,0);
+            }
+            else{strays.add(item);}
+            
+            
         }
+    }
+    
+    public static void redo(){
+        cumulatives.clear();
+        m=new model(height,width);
+       for(int i=0;i<m.height;i++){
+           cumulative c=new cumulative(m.height);
+           cumulatives.add(c);
+       }
+       items.addAll(0,strays);
+       strays.clear();
+       for(int i=0;i<items.size();i++){
+           try_to_fit(items.get(i),m,0,0);
+       }
+       
+       
+       
     }
     
     ///OUTSOURCE THIS TO VIEW!!!!!...OR DELETE IT, AS SEE FIT

@@ -15,6 +15,8 @@ public class item {
     int width=0;
     int height=0;
     
+    int modified=0;
+    
     ///THIS IS A READONLY METHOD
     ///0 MEANS HORIZONTAL
     ///1 MEANS VERTICAL
