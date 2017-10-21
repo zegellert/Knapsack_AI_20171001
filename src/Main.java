@@ -50,6 +50,8 @@ public class Main {
            try_to_fit(items.get(i),m,0,0);
        }
        
+       if(strays.size()>0){}
+       
        view.display_model(m);
        display_cumulatives(cumulatives);
        
@@ -67,33 +69,32 @@ public class Main {
         }
         else{
             
+            
         int column=X;
         int row=0;
-        
-        Boolean problem=false;
         
         ///COLUMN CHOOSING LOOP:
         ///THIS OUGHT TO BE DONE IN A WHILE LOOP:
         for(int i=0;i<cumulatives.size();i++){
             cumulative c=cumulatives.get(i);
-            if(item.height<c.space){
+            System.out.println("Item is: "+item.value+" Height is: "+item.height+" Col is: "+i+" Space is: "+c.space);
+            
+            if(item.height<=c.space){
                 column=i;
                 row=c.next;
-                System.out.println("Chosen column: "+column+","+row);
+                System.out.println("Chosen column: "+column+", row: "+row);
                 break;
             }
             
         }
+       
         
-        ///ROW SPACE CHECKING LOOP:
-        for(int j=row;j<row+item.width;j++){
-            if(m.getValue(column, j)!=0){
-                System.out.println("An item is in the way already.");
-                problem=true;
-            };
+        try{
+        item_to_sack(item,m,column,row);}
+        catch(Exception e){
+            System.out.println("Item went to strays.");
+            strays.add(item);
         }
-        
-        if(!problem){item_to_sack(item,m,column,row);}
         
         
         }//END OF ELSE
@@ -107,19 +108,21 @@ public class Main {
         
     }
     
+    public static void refitting_strays(){}
+    
     public static void item_to_sack(item item,model sack,int X,int Y){
         try{
-            sack.insert(X, Y, item);
+            sack.insert(Y, X, item);
             for(int i=X;i<X+item.width;i++){
                 cumulative c=cumulatives.get(i);
                 c.space-=item.height;
-                c.next=Y+item.height+1;
+                c.next=Y+item.height;
             }
         
         }
         catch(Exception e){
             
-            System.out.println("That item couldn't be inserted there. Error: "+e.getMessage());}
+            System.out.println("Item "+item.value+" couldn't be inserted to: "+X+","+Y+". Error: "+e.getMessage());}
     }
     
     ///OUTSOURCE THIS TO VIEW!!!!!...OR DELETE IT, AS SEE FIT
