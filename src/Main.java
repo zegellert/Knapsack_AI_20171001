@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,6 +22,9 @@ public class Main {
     static ArrayList<item> strays=new ArrayList<item>();
     static ArrayList<cumulative> cumulatives=new ArrayList<cumulative>();
     static int number=0;
+    
+    static int width=0;
+    static int height=0;
 
    
     public static void main(String[] args) {
@@ -46,11 +50,22 @@ public class Main {
        }
        catch(Exception e){}
        
+       area_comparator ac=new area_comparator();
+       Collections.sort(items,Collections.reverseOrder(ac));
+       
        for(int i=0;i<items.size();i++){
            try_to_fit(items.get(i),m,0,0);
        }
        
-       if(strays.size()>0){}
+       if(strays.size()>0){
+           Collections.sort(strays,Collections.reverseOrder(ac));
+           for(int i=0;i<strays.size();i++){
+           try_to_fit(strays.get(i),m,0,0);
+       }
+           for(int i=0;i<items.size();i++){
+           try_to_fit(items.get(i),m,0,0);
+       }
+       }
        
        view.display_model(m);
        display_cumulatives(cumulatives);
@@ -65,6 +80,7 @@ public class Main {
     public static void try_to_fit(item item,model sack,int X,int Y){
         if(X>sack.width){
             System.out.println("Item went to strays.");
+            items.remove(item);
             strays.add(item);
         }
         else{
@@ -93,6 +109,7 @@ public class Main {
         item_to_sack(item,m,column,row);}
         catch(Exception e){
             System.out.println("Item went to strays.");
+            items.remove(item);
             strays.add(item);
         }
         
@@ -107,8 +124,7 @@ public class Main {
         
         
     }
-    
-    public static void refitting_strays(){}
+   
     
     public static void item_to_sack(item item,model sack,int X,int Y){
         try{
