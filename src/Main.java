@@ -87,7 +87,7 @@ public class Main {
       
       while(strays.size()>0){
         
-      for(int c=0;c<3;c++){
+      
           for(int i=0;i<strays.size();i++){
                item stray=strays.get(i);
                stray.modified=0;
@@ -95,7 +95,7 @@ public class Main {
           }
           Collections.sort(strays,Collections.reverseOrder(ac));
           redo();
-      }}
+      }
      
        
        view.display_model(m);
@@ -169,7 +169,7 @@ public class Main {
         catch(Exception e){
             
            //System.out.println("Item "+item.value+" ("+item.width+","+item.height+") couldn't be inserted to: "+X+","+Y+". Error: "+e.getMessage());
-            if(item.modified<4){
+            if(item.modified<3){
                 item.modified++;
                 item.rotate();
                 try_to_fit(item,sack,0,0);
