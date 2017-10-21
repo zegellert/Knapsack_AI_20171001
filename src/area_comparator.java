@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author Gellert_Zelenak
+ * @author Gellert Zelenak
  */
 public class area_comparator implements Comparator<item>{
 

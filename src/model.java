@@ -16,17 +16,18 @@ public class model {
     HashMap<Point,item> items=new HashMap<Point, item>();
     
     int[][] array;
-    int width;
     int height;
+    int width;
     public model(){
-        width=5;
         height=5;
-        array=new int[width][height];
+        width=5;
+        array=new int[height][width];
     }
-    public model(int w,int h){
-        width=w;
+    public model(int h,int w){
         height=h;
-        array=new int[width][height];
+        width=w;
+        
+        array=new int[height][width];
     }
     
     public int getValue(int X,int Y){
@@ -35,8 +36,8 @@ public class model {
     
     public int getFreeSpace(){
         int space=0;
-         for(int i=0;i<width;i++){
-            for(int j=0;j<height;j++){
+         for(int i=0;i<height;i++){
+            for(int j=0;j<width;j++){
                     if(array[i][j]==0){space++;}
             }
         }

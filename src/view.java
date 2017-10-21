@@ -6,14 +6,14 @@
 
 /**
  *
- * @author Gellert-Eva
+ * @author Gellert Zelenak
  */
 public class view {
     
     public static void display_model(model m){
-        for(int i=0;i<m.width;i++){
+        for(int i=0;i<m.height;i++){
             System.out.print("\n");
-            for(int j=0;j<m.height;j++){
+            for(int j=0;j<m.width;j++){
                 if(j==0){System.out.print(m.array[i][j]);}
                 else{System.out.print("\t"+m.array[i][j]);}
             }

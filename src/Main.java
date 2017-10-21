@@ -34,7 +34,9 @@ public class Main {
        try{
        
        String size=reader.readLine();
-       m=new model(Integer.parseInt(size.split("\t")[0]),Integer.parseInt(size.split("\t")[1]));
+       height=Integer.parseInt(size.split("\t")[0]);
+       width=Integer.parseInt(size.split("\t")[1]);
+       m=new model(height,width);
        for(int i=0;i<m.height;i++){
            cumulative c=new cumulative(m.height);
            cumulatives.add(c);
@@ -58,6 +60,12 @@ public class Main {
        }
        
        if(strays.size()>0){
+           cumulatives.clear();
+           m=new model(height,width);
+            for(int i=0;i<m.height;i++){
+           cumulative c=new cumulative(m.height);
+           cumulatives.add(c);
+            }
            Collections.sort(strays,Collections.reverseOrder(ac));
            for(int i=0;i<strays.size();i++){
            try_to_fit(strays.get(i),m,0,0);
@@ -68,7 +76,8 @@ public class Main {
        }
        
        view.display_model(m);
-       display_cumulatives(cumulatives);
+       
+       //display_cumulatives(cumulatives);
        
        
        
@@ -79,7 +88,6 @@ public class Main {
     
     public static void try_to_fit(item item,model sack,int X,int Y){
         if(X>sack.width){
-            System.out.println("Item went to strays.");
             items.remove(item);
             strays.add(item);
         }
@@ -93,12 +101,10 @@ public class Main {
         ///THIS OUGHT TO BE DONE IN A WHILE LOOP:
         for(int i=0;i<cumulatives.size();i++){
             cumulative c=cumulatives.get(i);
-            System.out.println("Item is: "+item.value+" Height is: "+item.height+" Col is: "+i+" Space is: "+c.space);
             
             if(item.height<=c.space){
                 column=i;
                 row=c.next;
-                System.out.println("Chosen column: "+column+", row: "+row);
                 break;
             }
             
@@ -108,7 +114,6 @@ public class Main {
         try{
         item_to_sack(item,m,column,row);}
         catch(Exception e){
-            System.out.println("Item went to strays.");
             items.remove(item);
             strays.add(item);
         }
@@ -138,7 +143,8 @@ public class Main {
         }
         catch(Exception e){
             
-            System.out.println("Item "+item.value+" couldn't be inserted to: "+X+","+Y+". Error: "+e.getMessage());}
+            //System.out.println("Item "+item.value+" couldn't be inserted to: "+X+","+Y+". Error: "+e.getMessage());
+        }
     }
     
     ///OUTSOURCE THIS TO VIEW!!!!!...OR DELETE IT, AS SEE FIT
